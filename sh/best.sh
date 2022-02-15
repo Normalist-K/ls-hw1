@@ -1,4 +1,4 @@
 #!/bin/bash
-source ./config.sh
+source ../config.sh
 
 cd $DATA_DIR

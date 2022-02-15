@@ -3,7 +3,7 @@ HW1: 11-775 Large-Scale Multimedia Analysis, Spring 2022
 
 ## 0. Prerquisite
 
-** Please modify `config.sh` for your own path **
+**Please modify `config.sh` for your own path**
 - `BASE_DIR` : Base directory path that your *codes* are saved. 
 - `DATA_DIR` : Data directory path that your *data* are saved.
 
@@ -25,45 +25,49 @@ $ pip install -r requirements.txt
 ```
 Dependencies: OpenSMILE
 ```
-$ bash install_opensmile.sh
+$ bash sh/install_opensmile.sh
 ```
 ## 1. Data and Labels
 
-Download video data: same as baseline code TA provided.
+1. Download video data: same as baseline code TA provided.
 - [download link](https://drive.google.com/file/d/1WEINPdvQ1ZUELxaXlhHcvoOjEML8gYYY/view?usp=sharing)
 
-Uncompress the data into *the folder you use*. 
+2. Uncompress the data into *the folder you use*. 
+3. split data to K-Fold
+```
+$ bash sh/split.sh
+```
 
 
 Extract the audios(.wav & .mp3) from the videos
 - .wav: for MFCC-Bag-Of-Feature
 - .mp3: for SoundNet-Global-Pool (sampling rate: 22050)
 ```
-$ bash extract_audio.sh
+$ bash sh/extract_audio.sh
 ```
 
 ## 2. Feature Extractor
 
 1. MFCC-Bag-Of-Feature
 ```
-$ bash mfcc.sh
+$ bash sh/mfcc.sh
 ```
 - SoundNet-Global-Pool
 ```
 # reference: https://github.com/salmedina/soundnet_pytorch
-$ bash soundnet.sh
+$ bash sh/soundnet.sh
 ```
 
 ### 3. Classifier results
 
 1. mfcc.csv : MFCC-Bag-Of-Feature + SVM classifier
 ```
-$ bash mfcc_svm.sh
+$ bash sh/mfcc_svm.sh
 ```
 
 2. soundnet.csv : SoundNet(y_scns) + MLP classifier
 ```
-$ bash soundnet_mlp.sh
+$ bash sh/soundnet_mlp.sh
 ```
 
 3. best.csv : SoundNet(y_scns) + MLP(3 layers) classifier
