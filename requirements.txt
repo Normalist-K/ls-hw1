@@ -1,0 +1,10 @@
+# --------- pytorch --------- #
+# install pytorch according to instructions
+# https://pytorch.org/get-started/
+# torch>=1.10.0
+
+# --------- others --------- #
+sh
+scikit-learn
+pandas
+tqdm
