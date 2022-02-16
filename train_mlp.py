@@ -27,26 +27,17 @@ if __name__ == '__main__':
   else:
     hidden_dim = tuple(args.hidden_dim)
 
-  # 1. read all features in one array.
-  fread = open(args.list_videos, "r")
-  feat_list = []
-  # labels are [0-9]
-  label_list = []
-  # load video names and events in dict
-  df_videos_label = {}
-  for line in open(args.list_videos).readlines()[1:]:
-    video_id, category = line.strip().split(",")
-    df_videos_label[video_id] = category
+  df = pd.read_csv(args.list_videos)
 
-  for line in fread.readlines()[1:]:
-    video_id = line.strip().split(",")[0]
-    feat_filepath = os.path.join(args.feat_dir, video_id + args.feat_appendix)
-    # for videos with no audio, ignored in training
-    if os.path.exists(feat_filepath):
-      feat_list.append(np.genfromtxt(feat_filepath, delimiter=";", dtype="float"))
+  feat_list, label_list = [], []
 
-      label_list.append(int(df_videos_label[video_id]))
-
+  for video_id, label in zip(df.Id, df.Category):
+      feat_filepath = os.path.join(args.feat_dir, video_id+args.feat_appendix)
+      if os.path.exists(feat_filepath):
+          feat_list.append(np.genfromtxt(feat_filepath, delimiter=";", dtype="float"))
+          label_list.append(int(label))
+      else:
+          print(video_id)
 
   print("number of samples: %s" % len(feat_list))
   X = np.array(feat_list)

@@ -1,12 +1,14 @@
 #!/bin/python
 
-import numpy as np
 import os
-from sklearn.svm import SVC
 import pickle
 import argparse
 import sys
 import pdb
+import numpy as np
+from sklearn.svm import SVC
+from sklearn.model_selection import cross_validate
+from sklearn.metrics import confusion_matrix
 
 # Train SVM
 
@@ -20,26 +22,17 @@ parser.add_argument("--feat_appendix", default=".csv")
 if __name__ == '__main__':
   args = parser.parse_args()
 
-  # 1. read all features in one array.
-  fread = open(args.list_videos, "r")
-  feat_list = []
-  # labels are [0-9]
-  label_list = []
-  # load video names and events in dict
-  df_videos_label = {}
-  for line in open(args.list_videos).readlines()[1:]:
-    video_id, category = line.strip().split(",")
-    df_videos_label[video_id] = category
+  df = pd.read_csv(args.list_videos)
 
+  feat_list, label_list = [], []
 
-  for line in fread.readlines()[1:]:
-    video_id = line.strip().split(",")[0]
-    feat_filepath = os.path.join(args.feat_dir, video_id + args.feat_appendix)
-    # for videos with no audio, ignore
-    if os.path.exists(feat_filepath):
-      feat_list.append(np.genfromtxt(feat_filepath, delimiter=";", dtype="float"))
-
-      label_list.append(int(df_videos_label[video_id]))
+  for video_id, label in zip(df.Id, df.Category):
+      feat_filepath = os.path.join(args.feat_dir, video_id+args.feat_appendix)
+      if os.path.exists(feat_filepath):
+          feat_list.append(np.genfromtxt(feat_filepath, delimiter=";", dtype="float"))
+          label_list.append(int(label))
+      else:
+          print(video_id)
 
   print("number of samples: %s" % len(feat_list))
   y = np.array(label_list)
@@ -47,8 +40,10 @@ if __name__ == '__main__':
 
   # pass array for svm training
   # one-versus-rest multiclass strategy
-  clf = SVC(cache_size=2000, decision_function_shape='ovr', kernel="rbf")
-  clf.fit(X, y)
+  clf = SVC(cache_size=2000, decision_function_shape='ovr', kernel="rbf", C=50, gamma=1.0)
+  result = pd.DataFrame(cross_validate(clf, X, y, cv =5))
+  print(result)
+  print('mean of cross validation: ', np.mean(result.test_score))
 
   # save trained SVM in output_file
   pickle.dump(clf, open(args.output_file, 'wb'))

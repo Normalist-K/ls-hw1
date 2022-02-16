@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../config.sh
-TRAIN_DATA=$DATA_DIR/labels/train_val.csv
+source ./config.sh
+TRAIN_DATA=$DATA_DIR/labels/kfold_df.csv
 TEST_DATA=$DATA_DIR/labels/test_for_students.csv
 
 cd $DATA_DIR

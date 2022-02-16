@@ -30,6 +30,7 @@ if __name__ == '__main__':
     selection = pd.read_csv(args.input_path, sep=';', dtype='float')
     X = selection.values
     start = time.time()
+    print("Start training")
     kmeans = KMeans(n_clusters=args.k, random_state=0, n_jobs=10).fit(X)
     end = time.time()
 
@@ -38,4 +39,4 @@ if __name__ == '__main__':
 
     print(f'K-means model with {args.k} centroid trained successfully!')
     print(f'Model saved to:            {args.output_path}')
-    print(f'Time elapsed for training: {end-start}')
+    print(f'Time elapsed for training: {(end-start)//60}')

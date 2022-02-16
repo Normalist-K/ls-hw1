@@ -39,7 +39,7 @@ $ bash sh/split.sh
 ```
 
 
-Extract the audios(.wav & .mp3) from the videos
+4. Extract the audios(.wav & .mp3) from the videos
 - .wav: for MFCC-Bag-Of-Feature
 - .mp3: for SoundNet-Global-Pool (sampling rate: 22050)
 ```
@@ -52,13 +52,13 @@ $ bash sh/extract_audio.sh
 ```
 $ bash sh/mfcc.sh
 ```
-- SoundNet-Global-Pool
+2. SoundNet-Global-Pool
 ```
 # reference: https://github.com/salmedina/soundnet_pytorch
 $ bash sh/soundnet.sh
 ```
 
-### 3. Classifier results
+## 3. Classifier results
 
 1. mfcc.csv : MFCC-Bag-Of-Feature + SVM classifier
 ```

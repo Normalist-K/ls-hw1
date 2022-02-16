@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../config.sh
+source ./config.sh
 TRAIN_DATA=$DATA_DIR/labels/train_val.csv
 TEST_DATA=$DATA_DIR/labels/test_for_students.csv
 

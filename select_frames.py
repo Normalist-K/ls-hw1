@@ -6,6 +6,7 @@ import os
 
 import numpy
 from tqdm import tqdm
+import time
 
 
 def parse_args():
@@ -25,6 +26,8 @@ def parse_args():
   return parser.parse_args()
 
 if __name__ == "__main__":
+  start_time = time.time()
+
   args = parse_args()
 
   fread = open(args.input_path, "r")
@@ -48,4 +51,7 @@ if __name__ == "__main__":
       for m in range(1, feat_dim):
         line += ";" + str(array[n][m])
       fwrite.write(line + "\n")
+  fread.close()
   fwrite.close()
+
+  print("time: ", (time.time() - start_time)//60, " m (select_frames.py)")
