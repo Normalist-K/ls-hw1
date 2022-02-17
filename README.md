@@ -72,5 +72,5 @@ $ bash sh/soundnet_mlp.sh
 
 3. best.csv : SoundNet(y_scns) + MLP(3 layers) classifier
 ```
-
+$ bash sh/best.sh
 ```

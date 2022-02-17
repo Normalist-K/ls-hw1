@@ -10,7 +10,7 @@ for file in wav/*;do
     $BASE_DIR/tools/opensmile-3.0.1-linux-x64/bin/SMILExtract -C $BASE_DIR/config/MFCC12_0_D_A.conf -I ${file} -O mfcc/${filename}.mfcc.csv;
 done
 
-# select framges using K-Means using 20% sampling
+# select frames using 20% sampling
 # and save the result in /mfcc/selected.mfcc.csv
 python $BASE_DIR/select_frames.py --input_path labels/train_val.csv --ratio 0.2 --output_path mfcc/selected.mfcc.csv --mfcc_dir mfcc/
 
