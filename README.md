@@ -53,8 +53,8 @@ $ bash sh/extract_audio.sh
 $ bash sh/mfcc.sh
 ```
 2. SoundNet-Global-Pool
+    -  reference: https://github.com/salmedina/soundnet_pytorch
 ```
-# reference: https://github.com/salmedina/soundnet_pytorch
 $ bash sh/soundnet.sh
 ```
 
@@ -71,7 +71,7 @@ $ bash sh/soundnet_mlp.sh
 ```
 
 3. best.csv : AST(Audio Spectrogram Transformer) + Linear head
-- (ref: https://github.com/YuanGongND/ast)
+    - reference: https://github.com/YuanGongND/ast
 ```
 $ bash sh/best.sh
 ```
