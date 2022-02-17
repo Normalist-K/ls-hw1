@@ -70,7 +70,8 @@ $ bash sh/mfcc_svm.sh
 $ bash sh/soundnet_mlp.sh
 ```
 
-3. best.csv : SoundNet(y_scns) + MLP(3 layers) classifier
+3. best.csv : AST(Audio Spectrogram Transformer) + Linear head
+- (ref: https://github.com/YuanGongND/ast)
 ```
 $ bash sh/best.sh
 ```
